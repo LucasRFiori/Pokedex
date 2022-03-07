@@ -40,6 +40,7 @@ const style = StyleSheet.create({
     backgroundColor: "#f0f0f0",
     borderRadius : 50,
     borderWidth: 10,
+    borderColor : '#222224',
     display : "flex",
     justifyContent : "center",
     alignItems : "center"
