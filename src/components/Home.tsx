@@ -3,8 +3,9 @@ import GeneralStatusBar from './GeneralStatusBar'
 import style from './Styles'
 import getPokemon from "../functions/getPokemon";
 import PokemonLogo from '../../assets/svgs/pokemonlogo.svg'
-import { View, TextInput, Image, Text } from "react-native";
+import { View, TextInput, Image, Text, ActivityIndicator } from "react-native";
 import { captalizeText } from '../functions/geral'
+import { debounce } from 'lodash'
 
 interface PokeInformations{
   name: string,
@@ -20,10 +21,14 @@ interface PokemonMount{
 const Home = () => {
   const [text, setText]  = useState("")
   const [pokemon, setPokemon] = useState<PokemonMount>()
+  const [loader, setLoader] = useState(false)
   
   const handleText = (text : string) => {
     setText(text)
+    setLoader(true)
   }
+
+  const debouncedOnChange = debounce(handleText, 500)
 
   useEffect(() => {
     if(text){
@@ -33,6 +38,7 @@ const Home = () => {
           img : data.sprites.front_default
         }
         setPokemon(pokemon)
+        setLoader(false)
       })
     }
   })
@@ -46,11 +52,17 @@ const Home = () => {
         <TextInput
           style={style.inputPokemon}
           placeholder="Search pokemons with name or id!"
-          onChangeText={evt => handleText(evt)}
+          onChangeText={debouncedOnChange}
         />
       </View>
-
       <View style={style.divisor}>
+        {loader && (
+          <ActivityIndicator 
+            size={"large"} 
+            color={"#ffcc01"}
+            style={style.loader}
+          />
+        )}
         <View style={style.outBall}>
           <View style={style.innerBall}>
           </View>

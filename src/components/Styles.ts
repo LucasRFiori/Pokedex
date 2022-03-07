@@ -27,7 +27,12 @@ const style = StyleSheet.create({
     display : "flex",
     justifyContent : "center",
     alignItems: "center",
-    zIndex: 1
+    zIndex: 1,
+    position: "relative"
+  },
+  loader : {
+    position : "absolute",
+    zIndex: 2
   },
   outBall : {
     width : 80,
