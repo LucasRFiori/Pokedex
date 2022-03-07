@@ -80,7 +80,7 @@ const Home = () => {
           )}
           </View>
           {pokemon?.name && (
-            <Text>Name: {captalizeText(pokemon.name)}</Text>
+            <Text style={{ fontSize: 30}}>{captalizeText(pokemon.name)}</Text>
           )}
         </View>
       </View>
